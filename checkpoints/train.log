@@ -1,0 +1,23 @@
+/Users/kywn/Library/Application Support/Claude/scratch-workspaces/c596fd0c-73ef-4045-938e-c61a6fb17272/cd0f89f3-c6d2-44a1-bdde-39f9125e5382/scratch-2026-10-21-1851e3/tiggle_swarm/train.py:342: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  std = float(actor.log_std.exp().mean())
+[   1] N= 2 보상    -8.97  추종오차  0.82cm  성공 1.00  접촉  0.00  std 0.30      4s
+[   5] N= 2 보상    -7.67  추종오차  0.63cm  성공 1.00  접촉  0.00  std 0.29     20s
+[  10] N= 2 보상    -7.98  추종오차  0.67cm  성공 1.00  접촉  0.00  std 0.29     39s
+[  15] N= 2 보상    -7.45  추종오차  0.61cm  성공 1.00  접촉  0.00  std 0.28     59s
+[  20] N= 4 보상    -7.10  추종오차  0.63cm  성공 1.00  접촉  0.00  std 0.27     94s
+[  25] N= 4 보상    -6.95  추종오차  0.69cm  성공 1.00  접촉  0.00  std 0.26    128s
+[  30] N= 4 보상    -6.62  추종오차  0.73cm  성공 1.00  접촉  0.00  std 0.26    162s
+[  35] N= 4 보상    -5.59  추종오차  0.58cm  성공 1.00  접촉  0.00  std 0.25    195s
+[  40] N= 4 보상    -5.84  추종오차  0.63cm  성공 1.00  접촉  0.00  std 0.24    230s
+[  45] N= 8 보상    -7.50  추종오차  0.86cm  성공 0.98  접촉  0.00  std 0.23    295s
+[  50] N= 8 보상    -7.47  추종오차  0.89cm  성공 0.98  접촉  0.00  std 0.23    363s
+[  55] N= 8 보상    -9.19  추종오차  1.16cm  성공 0.96  접촉  0.00  std 0.22    429s
+[  60] N= 8 보상    -6.96  추종오차  0.83cm  성공 0.98  접촉  0.00  std 0.21    496s
+[  65] N= 8 보상    -6.82  추종오차  0.83cm  성공 0.98  접촉  0.00  std 0.21    565s
+[  70] N= 8 보상    -6.08  추종오차  0.74cm  성공 1.00  접촉  0.00  std 0.20    632s
+[  75] N= 8 보상    -6.21  추종오차  0.76cm  성공 1.00  접촉  0.00  std 0.19    701s
+[  80] N= 8 보상    -7.60  추종오차  0.99cm  성공 1.00  접촉  0.00  std 0.18    770s
+[  85] N= 8 보상    -5.72  추종오차  0.72cm  성공 1.00  접촉  0.00  std 0.17    839s
+[  90] N= 8 보상    -6.66  추종오차  0.86cm  성공 0.98  접촉  0.06  std 0.17    913s
+[  95] N=15 보상    -7.35  추종오차  0.89cm  성공 0.94  접촉  0.00  std 0.16   1059s

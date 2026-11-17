@@ -1,0 +1,17 @@
+[project]
+name = "tiggle-nl"
+version = "0.1.0"
+description = "TIGGLE 자연어 명령 -> TaskSpec 파서 (규칙 + Claude Haiku 폴백)"
+requires-python = ">=3.10"
+dependencies = ["anthropic>=1.17", "pydantic>=2.7", "numpy>=1.26"]
+
+[project.optional-dependencies]
+swarm = ["scipy>=1.11", "torch>=2.2"]
+dev = ["pytest>=8"]
+
+[tool.setuptools]
+packages = ["tiggle_nl", "tiggle_swarm"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

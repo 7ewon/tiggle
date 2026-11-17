@@ -1,0 +1,457 @@
+{
+  "$defs": {
+    "Dock": {
+      "additionalProperties": false,
+      "properties": {
+        "robots": {
+          "description": "대상 로봇 ID 목록. 전체를 뜻하면 모든 ID를 적는다",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Robots",
+          "type": "array"
+        },
+        "primitive": {
+          "const": "dock",
+          "title": "Primitive",
+          "type": "string"
+        }
+      },
+      "required": [
+        "robots",
+        "primitive"
+      ],
+      "title": "Dock",
+      "type": "object"
+    },
+    "Follow": {
+      "additionalProperties": false,
+      "properties": {
+        "robots": {
+          "description": "대상 로봇 ID 목록. 전체를 뜻하면 모든 ID를 적는다",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Robots",
+          "type": "array"
+        },
+        "primitive": {
+          "const": "follow",
+          "title": "Primitive",
+          "type": "string"
+        },
+        "leader": {
+          "description": "따라갈 로봇 ID. robots에 포함되면 안 된다",
+          "title": "Leader",
+          "type": "integer"
+        },
+        "spacing_m": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "앞 로봇과의 간격 (m)",
+          "title": "Spacing M"
+        }
+      },
+      "required": [
+        "robots",
+        "primitive",
+        "leader"
+      ],
+      "title": "Follow",
+      "type": "object"
+    },
+    "Formation": {
+      "additionalProperties": false,
+      "properties": {
+        "robots": {
+          "description": "대상 로봇 ID 목록. 전체를 뜻하면 모든 ID를 적는다",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Robots",
+          "type": "array"
+        },
+        "primitive": {
+          "const": "formation",
+          "title": "Primitive",
+          "type": "string"
+        },
+        "shape": {
+          "description": "line: 가로 일렬(옆으로 나란히) / column: 세로 일렬(앞뒤로 줄서기) / circle / v / triangle / square / grid",
+          "enum": [
+            "line",
+            "column",
+            "circle",
+            "v",
+            "triangle",
+            "square",
+            "grid"
+          ],
+          "title": "Shape",
+          "type": "string"
+        },
+        "spacing_m": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "이웃 로봇 간 간격 (m). null이면 기본값",
+          "title": "Spacing M"
+        },
+        "radius_m": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "circle 전용 반지름 (m). spacing_m과 동시에 쓰지 않는다",
+          "title": "Radius M"
+        },
+        "center": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Point"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "대형 중심. null이면 현재 무게중심"
+        },
+        "heading_deg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "대형이 바라보는 방향. null이면 0도(앞)",
+          "title": "Heading Deg"
+        },
+        "speed": {
+          "default": "normal",
+          "enum": [
+            "slow",
+            "normal",
+            "fast"
+          ],
+          "title": "Speed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "robots",
+        "primitive",
+        "shape"
+      ],
+      "title": "Formation",
+      "type": "object"
+    },
+    "Gather": {
+      "additionalProperties": false,
+      "properties": {
+        "robots": {
+          "description": "대상 로봇 ID 목록. 전체를 뜻하면 모든 ID를 적는다",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Robots",
+          "type": "array"
+        },
+        "primitive": {
+          "const": "gather",
+          "title": "Primitive",
+          "type": "string"
+        },
+        "center": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Point"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "모일 지점. null이면 현재 무게중심"
+        },
+        "speed": {
+          "default": "normal",
+          "enum": [
+            "slow",
+            "normal",
+            "fast"
+          ],
+          "title": "Speed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "robots",
+        "primitive"
+      ],
+      "title": "Gather",
+      "type": "object"
+    },
+    "Move": {
+      "additionalProperties": false,
+      "properties": {
+        "robots": {
+          "description": "대상 로봇 ID 목록. 전체를 뜻하면 모든 ID를 적는다",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Robots",
+          "type": "array"
+        },
+        "primitive": {
+          "const": "move",
+          "title": "Primitive",
+          "type": "string"
+        },
+        "mode": {
+          "description": "relative: 무리 전체를 (x, y)만큼 평행이동 / absolute: 무리 중심을 (x, y) 지점으로 이동",
+          "enum": [
+            "relative",
+            "absolute"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "x": {
+          "description": "m",
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "description": "m",
+          "title": "Y",
+          "type": "number"
+        },
+        "speed": {
+          "default": "normal",
+          "enum": [
+            "slow",
+            "normal",
+            "fast"
+          ],
+          "title": "Speed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "robots",
+        "primitive",
+        "mode",
+        "x",
+        "y"
+      ],
+      "title": "Move",
+      "type": "object"
+    },
+    "Point": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "description": "경기장 좌표 x (m)",
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "description": "경기장 좌표 y (m)",
+          "title": "Y",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "Point",
+      "type": "object"
+    },
+    "Rotate": {
+      "additionalProperties": false,
+      "properties": {
+        "robots": {
+          "description": "대상 로봇 ID 목록. 전체를 뜻하면 모든 ID를 적는다",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Robots",
+          "type": "array"
+        },
+        "primitive": {
+          "const": "rotate",
+          "title": "Primitive",
+          "type": "string"
+        },
+        "angle_deg": {
+          "description": "+ 반시계(왼쪽), - 시계(오른쪽)",
+          "title": "Angle Deg",
+          "type": "number"
+        },
+        "pivot": {
+          "description": "group_center: 무리 중심 기준 공전 / self: 각자 제자리 회전",
+          "enum": [
+            "group_center",
+            "self"
+          ],
+          "title": "Pivot",
+          "type": "string"
+        },
+        "speed": {
+          "default": "normal",
+          "enum": [
+            "slow",
+            "normal",
+            "fast"
+          ],
+          "title": "Speed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "robots",
+        "primitive",
+        "angle_deg",
+        "pivot"
+      ],
+      "title": "Rotate",
+      "type": "object"
+    },
+    "Step": {
+      "additionalProperties": false,
+      "properties": {
+        "commands": {
+          "description": "동시에 실행할 명령들",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Stop"
+              },
+              {
+                "$ref": "#/$defs/Move"
+              },
+              {
+                "$ref": "#/$defs/Rotate"
+              },
+              {
+                "$ref": "#/$defs/Formation"
+              },
+              {
+                "$ref": "#/$defs/Gather"
+              },
+              {
+                "$ref": "#/$defs/Follow"
+              },
+              {
+                "$ref": "#/$defs/Dock"
+              },
+              {
+                "$ref": "#/$defs/Undock"
+              }
+            ]
+          },
+          "title": "Commands",
+          "type": "array"
+        }
+      },
+      "required": [
+        "commands"
+      ],
+      "title": "Step",
+      "type": "object"
+    },
+    "Stop": {
+      "additionalProperties": false,
+      "properties": {
+        "robots": {
+          "description": "대상 로봇 ID 목록. 전체를 뜻하면 모든 ID를 적는다",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Robots",
+          "type": "array"
+        },
+        "primitive": {
+          "const": "stop",
+          "title": "Primitive",
+          "type": "string"
+        }
+      },
+      "required": [
+        "robots",
+        "primitive"
+      ],
+      "title": "Stop",
+      "type": "object"
+    },
+    "Undock": {
+      "additionalProperties": false,
+      "properties": {
+        "robots": {
+          "description": "대상 로봇 ID 목록. 전체를 뜻하면 모든 ID를 적는다",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Robots",
+          "type": "array"
+        },
+        "primitive": {
+          "const": "undock",
+          "title": "Primitive",
+          "type": "string"
+        }
+      },
+      "required": [
+        "robots",
+        "primitive"
+      ],
+      "title": "Undock",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Version",
+      "type": "string"
+    },
+    "steps": {
+      "description": "순서대로 실행할 단계들",
+      "items": {
+        "$ref": "#/$defs/Step"
+      },
+      "title": "Steps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "steps"
+  ],
+  "title": "TaskSpec",
+  "type": "object"
+}
